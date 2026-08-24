@@ -1,0 +1,32 @@
+name: Traspasar Maqueta 3D Santiago
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  importar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Descargar maqueta completa
+        run: |
+          mkdir -p data
+          curl -fL "https://raw.githubusercontent.com/PHDGEOGRAFO/GEOINDICADORES/main/maqueta3d/index.html" -o index.html
+          curl -fL "https://raw.githubusercontent.com/PHDGEOGRAFO/GEOINDICADORES/main/maqueta3d/data/barrios_oficial.geojson" -o data/barrios_oficial.geojson
+          curl -fL "https://raw.githubusercontent.com/PHDGEOGRAFO/GEOINDICADORES/main/maqueta3d/data/territorios_oficial.geojson" -o data/territorios_oficial.geojson
+          curl -fL "https://raw.githubusercontent.com/PHDGEOGRAFO/GEOINDICADORES/main/maqueta3d/data/santa_lucia_dem.js" -o data/santa_lucia_dem.js
+          curl -fL "https://raw.githubusercontent.com/PHDGEOGRAFO/GEOINDICADORES/main/maqueta3d/data/sii_compact.geojson.gz" -o data/sii_compact.geojson.gz
+          touch .nojekyll
+          printf '# MAQUETA 3D STGO\n\nVisor tridimensional independiente de la comuna de Santiago.\n' > README.md
+      - name: Guardar en el repositorio
+        run: |
+          git config user.name "PHDGEOGRAFO"
+          git config user.email "phernandezd@gmail.com"
+          git add index.html data .nojekyll README.md
+          git commit -m "Traspasar Maqueta 3D Santiago completa"
+          git push
