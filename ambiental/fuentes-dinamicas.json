@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "updated_on": "2026-10-22",
+  "purpose": "Registro de fuentes y validacion de conexiones para Ambiental STGO 3D; este JSON no ejecuta ingesta ni certifica disponibilidad.",
+  "sources": [
+    {
+      "id": "open_meteo",
+      "name": "Open-Meteo",
+      "category": "meteorologia",
+      "kind": "modelado_pronostico",
+      "entrypoint": "https://open-meteo.com/",
+      "integration": "codigo_existente_ambiental",
+      "cadence_policy": "consultar_max_cada_30_minutos_con_pagina_abierta",
+      "validation": "verificar_API_fecha_resolucion_y_licencia",
+      "status": "conexion_programada_no_auditada"
+    },
+    {
+      "id": "sinca",
+      "name": "SINCA MMA",
+      "category": "calidad_aire",
+      "kind": "observacion_estacion",
+      "entrypoint": "https://sinca.mma.gob.cl/",
+      "integration": "codigo_existente_ambiental",
+      "cadence_policy": "consultar_max_cada_30_minutos_con_pagina_abierta",
+      "validation": "periodo_promedio_estado_estacion_fecha_fuente",
+      "status": "conexion_programada_no_auditada"
+    },
+    {
+      "id": "dmc",
+      "name": "Dirección Meteorológica de Chile",
+      "category": "meteorologia",
+      "kind": "observacion_estacion",
+      "entrypoint": "https://climatologia.meteochile.gob.cl/",
+      "integration": "pendiente_servidor_seguro",
+      "cadence_policy": "segun_api_y_permiso",
+      "validation": "credenciales_privadas_estacion_calibracion",
+      "status": "pendiente"
+    },
+    {
+      "id": "senapred",
+      "name": "SENAPRED",
+      "category": "riesgos",
+      "kind": "inventario_periodico",
+      "entrypoint": "https://www.senapred.cl/",
+      "integration": "pendiente_validar_publicacion_formato_y_permiso",
+      "cadence_policy": "segun_version_oficial",
+      "validation": "anio_geometria_estado_version_original",
+      "status": "pendiente"
+    },
+    {
+      "id": "cr2met",
+      "name": "CR2MET",
+      "category": "clima_historico",
+      "kind": "grilla_historica",
+      "entrypoint": "https://www.cr2.cl/datos-productos-grillados/",
+      "integration": "pendiente_procesamiento_gis",
+      "cadence_policy": "segun_publicacion_producto",
+      "validation": "variable_periodo_resolucion_unidad",
+      "status": "pendiente"
+    },
+    {
+      "id": "arclim",
+      "name": "ARClim",
+      "category": "escenarios_riesgo",
+      "kind": "proyeccion",
+      "entrypoint": "https://arclim.mma.gob.cl/atlas/api/",
+      "integration": "pendiente_seleccion_de_indicadores",
+      "cadence_policy": "segun_version_atlas",
+      "validation": "escenario_periodo_dimension_geografica",
+      "status": "pendiente"
+    },
+    {
+      "id": "windy",
+      "name": "Windy",
+      "category": "meteorologia_contextual",
+      "kind": "visualizacion_externa",
+      "entrypoint": "https://www.windy.com/",
+      "integration": "referencia_visual",
+      "cadence_policy": "segun_servicio",
+      "validation": "sin_extraccion_ni_uso_como_medicion_local",
+      "status": "referencia"
+    },
+    {
+      "id": "stgohot",
+      "name": "StgoHot",
+      "category": "temperatura_superficial",
+      "kind": "raster_fecha_especifica",
+      "entrypoint": null,
+      "integration": "pendiente_origen_validado",
+      "cadence_policy": "segun_adquisicion",
+      "validation": "fecha_satelite_resolucion_y_unidades",
+      "status": "pendiente"
+    }
+  ],
+  "record_template": {
+    "last_attempt_at": null,
+    "last_success_at": null,
+    "last_observation_at": null,
+    "source_timezone": null,
+    "spatial_resolution": null,
+    "unit": null,
+    "license_checked": false,
+    "quality_flag": "sin_verificar",
+    "error": null
+  }
+}
