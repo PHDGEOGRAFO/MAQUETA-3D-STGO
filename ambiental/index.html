@@ -72,4 +72,4 @@ $('sincaRefresh').onclick=refreshSinca;
 setInterval(()=>{if($('weatherAuto').checked&&!document.hidden)refreshSinca()},1800000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&$('weatherAuto').checked&&Date.now()-sincaSuccessAt>=1800000)refreshSinca()});
 refreshSinca();
-</script></body></html>
+</script><script defer src="https://phdgeografo.github.io/GIS-STGO/assets/layout-export.js?v=1.2"></script></body></html>
